@@ -13,7 +13,8 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        return view('alumnos/index');
+        $alumnos = Alumno::all();
+        return view('alumnos.index', ['alumnos' => $alumnos]);
     }
 
     /**
@@ -21,15 +22,25 @@ class AlumnoController extends Controller
      */
     public function create()
     {
-        return view('alumnos.create', ['niveles'=>Nivel::all()]);
+        //subdirectorio alumnos 
+        return view('alumnos.create', ['niveles' => Nivel::all()]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Creamos un objeto alumno con los datos que he recibido de la vista create
      */
     public function store(Request $request)
     {
-        //
+        //se deben hacer validaciones 
+        $alumno = new Alumno();
+        $alumno->matricula = $request->input('matricula');
+        $alumno->nombre = $request->input('nombre');
+        $alumno->fecha_nacimiento = $request->input('fecha');
+        $alumno->telefono = $request->input('telefono');
+        $alumno->email = $request->input('email');
+        $alumno->nivel_id = $request->input(key: 'nivel');
+        $alumno->save();
+        return view('alumnos.message', ['msg'=>'Aumno insertado']);
     }
 
     /**
