@@ -40,7 +40,7 @@ class AlumnoController extends Controller
         $alumno->email = $request->input('email');
         $alumno->nivel_id = $request->input(key: 'nivel');
         $alumno->save();
-        return view('alumnos.message', ['msg'=>'Aumno insertado']);
+        return view('alumnos.message', ['msg'=>'Alumno insertado']);
     }
 
     /** 
@@ -50,6 +50,7 @@ class AlumnoController extends Controller
     {
         //detalles con find que es un propiedad de alumno
         $alumnoid = Alumno::find($id);
+        return view('alumnos.show', ['alumnoid' => $alumnoid]);
     }
 
     /**
@@ -71,8 +72,11 @@ class AlumnoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Alumno $alumno)
-    {
-        //
+    public function destroy($id)
+    {//capturo el alumno
+        $alumnoid = Alumno::find($id);
+        $alumnoid->delete();
+        return view('alumnos.message', ['msg'=>'Alumno eliminado']);
+
     }
 }

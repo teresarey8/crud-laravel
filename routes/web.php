@@ -17,4 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+//como los crea solo el sabe cual es cada ruta y no las tenemos que especificar
 Route::resource('/alumnos', AlumnoController::class);
+//pero las nuevas si que las tengo que poner

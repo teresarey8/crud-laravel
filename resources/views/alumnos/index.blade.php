@@ -33,7 +33,11 @@
                             <td>{{$alumno->telefono}}</td>
                             <td>{{$alumno->email}}</td>
                             <td>{{$alumno->nivel_id}}</td>
-                            <td></td>
+                            <form action="{{url('alumnos/' . $alumno->id)}}" method="post">
+                                @method("DELETE")
+                                @csrf
+                                <td><button type="submit" class="btn btn-danger">Eliminar</button></td>
+                            </form>
                             <td></td>
                         </tr>
                     @endforeach
