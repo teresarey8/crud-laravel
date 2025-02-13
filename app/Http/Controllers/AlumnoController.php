@@ -46,9 +46,10 @@ class AlumnoController extends Controller
     /** 
      * Display the specified resource.
      */
-    public function show(Alumno $alumno)
+    public function show($id)
     {
-        //detalles
+        //detalles con find que es un propiedad de alumno
+        $alumnoid = Alumno::find($id);
     }
 
     /**
