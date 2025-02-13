@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Nivel extends Model
 {
-    protected $tables  ='niveles';
+    protected $table  ='niveles';
 }
