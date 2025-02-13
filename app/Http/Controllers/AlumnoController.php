@@ -40,7 +40,7 @@ class AlumnoController extends Controller
         $alumno->email = $request->input('email');
         $alumno->nivel_id = $request->input(key: 'nivel');
         $alumno->save();
-        return view('alumnos.message', ['msg'=>'Alumno insertado']);
+        return view('alumnos.message', ['msg' => 'Alumno insertado']);
     }
 
     /** 
@@ -54,19 +54,33 @@ class AlumnoController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * este metodo recibe el id del producto a editar, invoca al metodo find(ID) del
+     * modelo para traer los datos de ese producto. Ese producto se guarda en $producto
+     * y depsues se invoca a la vista y se le pasa como paramtero ese producto para que la vista
+     * visualice todfos los atributos de ese producto.
      */
-    public function edit(Alumno $alumno)
+    public function edit($id)
     {
-        //
+        $alumno = Alumno::find($id);
+        return view('alumnos.edit', ['id'=>$id,'alumno' => $alumno]);
+
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Alumno $alumno)
+    public function update(Request $request, $id)
     {
-        //
+        $alumno = Alumno::find($id);
+        $alumno->matricula = $request->input('matricula');
+        $alumno->nombre = $request->input('nombre');
+        $alumno->fecha_nacimiento = $request->input('fecha');
+        $alumno->telefono = $request->input('telefono');
+        $alumno->email = $request->input('email');
+        $alumno->nivel_id = $request->input(key: 'nivel_id');
+        $alumno->save();
+        return view('alumnos.message', ['msg' => 'Alumno actualizado']);
     }
 
     /**
@@ -76,7 +90,7 @@ class AlumnoController extends Controller
     {//capturo el alumno
         $alumnoid = Alumno::find($id);
         $alumnoid->delete();
-        return view('alumnos.message', ['msg'=>'Alumno eliminado']);
+        return view('alumnos.message', ['msg' => 'Alumno eliminado']);
 
     }
 }
