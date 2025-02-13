@@ -43,12 +43,12 @@ class AlumnoController extends Controller
         return view('alumnos.message', ['msg'=>'Aumno insertado']);
     }
 
-    /**
+    /** 
      * Display the specified resource.
      */
     public function show(Alumno $alumno)
     {
-        //
+        //detalles
     }
 
     /**
