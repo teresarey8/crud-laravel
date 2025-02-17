@@ -19,4 +19,4 @@ Route::get('/', function () {
 });
 //como los crea solo el sabe cual es cada ruta y no las tenemos que especificar
 Route::resource('/alumnos', AlumnoController::class);
-//pero las nuevas si que las tengo que poner
+//pero las nuevas, si hay, si que las tengo que poner

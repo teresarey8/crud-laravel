@@ -42,6 +42,10 @@
                                 @csrf
                                 <td><button type="submit"class="btn btn-success" >Editar</button></td>
                             </form>
+                            <form action="{{url('alumnos/ ' . $alumno->id)}}" method="get">
+                                @csrf
+                                <td><button type="submit"class="btn btn-info" >Mostrar</button></td>
+                            </form>
                         </tr>
                     @endforeach
                 </tbody>
