@@ -11,24 +11,41 @@ class AlumnoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        /**
-         * Es un método de Eloquent (el ORM de Laravel) que recupera todos los registros de la tabla asociada al modelo. 
-         * En este caso, Alumno::all() consulta la tabla alumnos y 
-         * devuelve todos los registros (filas) en forma de una colección de objetos Alumno.
-         * Un ORM (Object-Relational Mapping) es una técnica de programación que permite interactuar con una 
-         * base de datos relacional usando objetos de un lenguaje de programación orientado a objetos 
-         * (como PHP, Python, Java, etc.) en lugar de escribir consultas SQL manualmente.
-         */
-        $alumnos = Alumno::all();
+        //paginacion
+
+        // Obtener fechas del formulario
+        $desde = $request->input('desde');
+        $hasta = $request->input('hasta');
+
+        // Iniciar la consulta base
+        $alumnos = Alumno::query();
+
+        // Aplicar filtros si se han seleccionado fechas
+        if ($desde) {
+            $alumnos->whereDate('fecha_nacimiento', '>=', $desde);
+        }
+        if ($hasta) {
+            $alumnos->whereDate('fecha_nacimiento', '<=', $hasta);
+        }
+
+        // Obtener resultados
+        $alumnos = $alumnos->get();
+
+        // Retornar vista con los datos filtrados y mantener los valores en el formulario
         /**
          * Esto es un array asociativo donde 'alumnos' es el nombre de la variable que se pasará a la vista.
          *$alumnos es la variable en el controlador que contiene los datos de los alumnos que recuperaste previamente 
          *de la base de datos (probablemente usando Alumno::all() o algún otro método para obtener los datos).
          *Este array pasa los datos de los alumnos a la vista para que puedan ser utilizados dentro de la plantilla.
          */
-        return view('alumnos.index', ['alumnos' => $alumnos]);
+        return view('alumnos.index', [
+            'alumnos' => $alumnos,
+            'desde' => $desde,
+            'hasta' => $hasta
+        ]);
+
     }
 
     /**
@@ -120,4 +137,6 @@ class AlumnoController extends Controller
         return view('alumnos.message', ['msg' => 'Alumno eliminado']);
 
     }
+
+
 }

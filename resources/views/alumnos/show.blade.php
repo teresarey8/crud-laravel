@@ -4,14 +4,16 @@
 
 @section('contentido')
     <main>
+        <h2>Detalles del alumno {{ $alumnoid->nombre}}</h2>
         <ul>
-            <li>{{ $alumnoid->id }}</li>
-            <li>{{ $alumnoid->matricula }}</li>
-            <li>{{ $alumnoid->nombre}}</li>
-            <li>{{$alumnoid->fecha_nacimiento}}</li>
-            <li>{{$alumnoid->email}}</li>
-            <li>{{$alumnoid->telefono}}</li>
-            <li>{{$alumnoid->nivel_id}}</li>
+            <li><strong>ID: </strong>{{ $alumnoid->id }}</li>
+            <li><strong>Matricula: </strong>{{ $alumnoid->matricula }}</li>
+            <li><strong>Nombre: </strong>{{ $alumnoid->nombre}}</li>
+            <li><strong>Fecha de nacimiento: </strong>{{$alumnoid->fecha_nacimiento}}</li>
+            <li><strong>Email: </strong>{{$alumnoid->email}}</li>
+            <li><strong>Telefono: </strong>{{$alumnoid->telefono}}</li>
+            <li><strong>Nivel: </strong>{{$alumnoid->nivel_id}}</li>
         </ul>
+        <a href="{{ url('alumnos') }}" class="btn btn-secondary">Regresar</a>
     </main>
 @endsection
